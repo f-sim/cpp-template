@@ -24,7 +24,7 @@ before_build:
 
 # build with MSBuild
 build:
-  project: Build\cpp-template.sln
+  project: Build\CPPTemplate.sln
   parallel: true
   verbosity: normal
 
