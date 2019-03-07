@@ -1,21 +1,22 @@
 language: cpp
 sudo: false
+dist: xenial
 
 matrix:
   include:
 
     - os: linux
       compiler: gcc
-      addons: &gcc6
+      addons: &gcc7
         apt:
           sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-6']
-      env: COMPILER='g++-6' BUILD_TYPE='Release'
+          packages: ['g++-7']
+      env: COMPILER='g++-7' BUILD_TYPE='Release'
 
     - os: linux
       compiler: gcc
-      addons: *gcc6
-      env: COMPILER='g++-6' BUILD_TYPE='Debug'
+      addons: *gcc7
+      env: COMPILER='g++-7' BUILD_TYPE='Debug'
 
     - os: linux
       compiler: gcc
@@ -32,65 +33,82 @@ matrix:
 
     - os: linux
       compiler: gcc
-      addons: &gcc7
+      addons: &gcc6
         apt:
           sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-7']
-      env: COMPILER='g++-7' BUILD_TYPE='Release'
+          packages: ['g++-6']
+      env: COMPILER='g++-6' BUILD_TYPE='Release'
 
     - os: linux
       compiler: gcc
-      addons: *gcc7
-      env: COMPILER='g++-7' BUILD_TYPE='Debug'
+      addons: *gcc6
+      env: COMPILER='g++-6' BUILD_TYPE='Debug'
 
     - os: linux
       compiler: clang
-      addons: &clang38
+      addons: &clang7
         apt:
-          sources: ['llvm-toolchain-precise-3.8', 'ubuntu-toolchain-r-test']
-          packages: ['clang-3.8']
-      env: COMPILER='clang++-3.8' BUILD_TYPE='Release'
+          sources: ['llvm-toolchain-xenial-7', 'ubuntu-toolchain-r-test']
+          packages: ['clang-7']
+      env: COMPILER='clang++-7' BUILD_TYPE='Release'
 
     - os: linux
       compiler: clang
-      addons: *clang38
-      env: COMPILER='clang++-3.8' BUILD_TYPE='Debug'
+      addons: *clang7
+      env: COMPILER='clang++-7' BUILD_TYPE='Debug'
 
     - os: linux
       compiler: clang
-      addons: &clang39
+      addons: &clang8
         apt:
-          sources: ['llvm-toolchain-precise-3.9', 'ubuntu-toolchain-r-test']
-          packages: ['clang-3.9']
-      env: COMPILER='clang++-3.9' BUILD_TYPE='Release'
+          sources: ['llvm-toolchain-precise-8', 'ubuntu-toolchain-r-test']
+          packages: ['clang-8']
+      env: COMPILER='clang++-8' BUILD_TYPE='Release'
 
     - os: linux
       compiler: clang
-      addons: *clang39
-      env: COMPILER='clang++-3.9' BUILD_TYPE='Debug'
-
-    - os: linux
-      compiler: clang
-      addons: &clang40
-        apt:
-          sources: ['llvm-toolchain-precise-4.0', 'ubuntu-toolchain-r-test']
-          packages: ['clang-4.0']
-      env: COMPILER='clang++-4.0' BUILD_TYPE='Release'
-
-    - os: linux
-      compiler: clang
-      addons: *clang40
-      env: COMPILER='clang++-4.0' BUILD_TYPE='Debug'
+      addons: *clang8
+      env: COMPILER='clang++-8' BUILD_TYPE='Debug'
 
     - os: osx
-      osx_image: xcode8.3
+      osx_image: xcode10.1
+      compiler: clang
+      env: COMPILER='clang++' BUILD_TYPE='Release'
+
+    - os: osx
+      osx_image: xcode10
+      compiler: clang
+      env: COMPILER='clang++' BUILD_TYPE='Release'
+
+    - os: osx
+      osx_image: xcode9
+      compiler: clang
+      env: COMPILER='clang++' BUILD_TYPE='Release'
+
+    - os: osx
+      osx_image: xcode9.4
+      compiler: clang
+      env: COMPILER='clang++' BUILD_TYPE='Release'
+
+    - os: osx
+      osx_image: xcode10.1
       compiler: clang
       env: COMPILER='clang++' BUILD_TYPE='Debug'
 
     - os: osx
-      osx_image: xcode8.3
+      osx_image: xcode10
       compiler: clang
-      env: COMPILER='clang++' BUILD_TYPE='Release'
+      env: COMPILER='clang++' BUILD_TYPE='Debug'
+
+    - os: osx
+      osx_image: xcode9
+      compiler: clang
+      env: COMPILER='clang++' BUILD_TYPE='Debug'
+
+    - os: osx
+      osx_image: xcode9.4
+      compiler: clang
+      env: COMPILER='clang++' BUILD_TYPE='Debug'
 
 install:
   - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
